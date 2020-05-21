@@ -1,0 +1,37 @@
+version: org.riotkit.rkd/0.5
+tasks:
+    :build:
+        arguments:
+            "--version":
+                help: "Taiga Events application version to build"
+                required: True
+            "--node-version":
+                default: "12.16.3"
+            "--alpine-version":
+                default: "3.11"
+            "--tag":
+                help: "Image tag"
+                default: "${ARG_VERSION}-SNAPSHOT"
+        steps: |
+            docker build . -f Dockerfile -t quay.io/riotkit/taiga-events:${ARG_TAG}\
+              --build-arg APP_VERSION=${ARG_VERSION}\
+              --build-arg NODE_VERSION=${ARG_NODE_VERSION}\
+              --build-arg ALPINE_VERSION=${ARG_ALPINE_VERSION}
+
+    :ci:build:
+        description: CI task
+        steps: |
+            LAST_VERSION=$(rkd --silent :get-last-version-hash)
+            rkd \
+                :build --version="${LAST_VERSION}" --tag="${LAST_VERSION}-SNAPSHOT"
+
+    :get-last-version-hash:
+        description: Get Taiga Event's last git commit id
+        steps: |
+            #!python
+            import requests
+
+            content = requests.get('https://api.github.com/repos/taigaio/taiga-events/commits/master').json()
+            print(content['sha'])
+
+            return True
