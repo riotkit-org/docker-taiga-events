@@ -1,0 +1,17 @@
+language: python
+os: linux
+if: branch = master or tag IS present
+python: 3.8
+
+before_script:
+    # authorization
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - echo "$QUAY_PASSWORD" | docker login -u "$QUAY_USERNAME" --password-stdin quay.io
+    - sudo chmod 777 /home/travis/.docker/config.json
+
+jobs:
+    include:
+        - stage: Build recent image
+          python: 3.8
+          script:
+              - rkd :ci:build

@@ -1,4 +1,8 @@
-version: org.riotkit.rkd/0.5
+version: org.riotkit.rkd/0.6
+imports:
+    - rkd.standardlib.jinja
+    - rkt_ciutils.docker
+
 tasks:
     :build:
         arguments:
@@ -35,3 +39,7 @@ tasks:
             print(content['sha'])
 
             return True
+
+    :generate-readme:
+        description: Before commiting, please regenerate the README.md from template
+        steps: rkd :docker:generate-readme -f ./Dockerfile -rt ./README.md.j2 --target-path ./README.md

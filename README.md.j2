@@ -14,13 +14,10 @@ Taiga Events server is used together with RabbitMQ to provide live changes reloa
 List of all environment variables that could be used.
 
 ```yaml
+{% for env_var, attrs in DOCKERFILE_ENVS.items() %}{% if attrs[2] %}# {{ attrs[2] }}{% endif %}
+- {{ attrs[0] }} # (default: {{ attrs[1] }})
 
-- AMQP_URL # (default: "")
-
-
-- BACKEND_SECRET # (default: "")
-
-
+{% endfor %}
 ```
 
 Copyleft
