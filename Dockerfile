@@ -41,4 +41,5 @@ USER root
 RUN chmod +x /entrypoint.sh
 
 USER node
+EXPOSE 8888
 ENTRYPOINT ["/entrypoint.sh"]

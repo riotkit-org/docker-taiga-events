@@ -9,6 +9,20 @@ Taiga Events server is used together with RabbitMQ to provide live changes reloa
 
 **See also:** `Taiga backend & frontend docker image <https://github.com/riotkit-org/docker-taiga>`_
 
+*Based on guide from https://taigaio.github.io/taiga-doc/dist/setup-production.html#taiga-events*
+
+#### Running
+
+*Notice: BACKEND_SECRET must match secret configured in Taiga*
+
+```bash
+docker run --name taiga_events \
+    -e AMQP_URL=amqp://... \
+    -e BACKEND_SECRET=... \
+    -p 8888:8888 \
+    quay.io/riotkit/taiga-events:2de073c1a3883023050597a47582c6a7405914de-SNAPSHOT
+```
+
 #### Configuration reference
 
 List of all environment variables that could be used.
@@ -19,6 +33,9 @@ List of all environment variables that could be used.
 
 
 - BACKEND_SECRET # (default: "")
+
+
+- RKD_PATH # (default: /opt/rkd/.rkd)
 
 
 ```
