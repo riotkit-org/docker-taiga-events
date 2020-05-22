@@ -18,6 +18,8 @@ tasks:
                 help: "Image tag"
                 default: "${ARG_VERSION}-SNAPSHOT"
         steps: |
+            export RKD_COMPAT_SUBPROCESS=true
+
             docker build . -f Dockerfile -t quay.io/riotkit/taiga-events:${ARG_TAG}\
               --build-arg APP_VERSION=${ARG_VERSION}\
               --build-arg NODE_VERSION=${ARG_NODE_VERSION}\
@@ -28,6 +30,7 @@ tasks:
     :ci:build:
         description: CI task
         steps: |
+            export RKD_COMPAT_SUBPROCESS=true
             LAST_VERSION=$(rkd --silent :get-last-version-hash)
             rkd \
                 :build --version="${LAST_VERSION}" --tag="${LAST_VERSION}-SNAPSHOT"
