@@ -16,9 +16,7 @@ ADD container-files/ /
 #
 ENV RKD_PATH=/opt/rkd/.rkd
 RUN apk add py3-pip bash git \
-    && apk add --virtual .DEPS gcc g++ musl-dev python3-dev libffi-dev openssl-dev \
-    && pip3 install -r /opt/rkd/requirements.txt \
-    && apk del .DEPS
+    && pip3 install -r /opt/rkd/requirements.txt
 
 #
 # Clone a proper version of Taiga Events
