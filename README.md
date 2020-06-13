@@ -7,7 +7,7 @@ Taiga Events server packaged in a docker image.
 Taiga Events server is used together with RabbitMQ to provide live changes reloading in Taiga application.
 ```
 
-**See also:** `Taiga backend & frontend docker image <https://github.com/riotkit-org/docker-taiga>`_
+**See also:** [Taiga backend & frontend docker image](https://github.com/riotkit-org/docker-taiga)
 
 *Based on guide from https://taigaio.github.io/taiga-doc/dist/setup-production.html#taiga-events*
 
